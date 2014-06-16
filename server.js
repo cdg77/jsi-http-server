@@ -19,13 +19,12 @@
 //   });
 // }).listen(3030);
 
-
 var http = require('http');
 var path = require('path');
 var fs = require('fs');
 http.createServer(function(req, res) {
   // var filePath = path.join(__dirname, 'big.html');
-  var filePath = __filename;
+  var filePath = path.join(__dirname, 'public', req.url);
   console.log('%s %s', req.connection.remoteAddress, req.url);
   var fileStream = fs.createReadStream(filePath);
   fileStream.pipe(res);
