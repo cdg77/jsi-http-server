@@ -29,6 +29,8 @@ http.createServer(function(req, res) {
   var fileStream = fs.createReadStream(filePath);
   fileStream.on('error', function(e) {
   	console.log('problem with file: ' + e.message);
+  	filePath = path.join(__dirname, 'public/error.html');
+  	fs.createReadStream(filePath).pipe(res);
   });
 
   fileStream.pipe(res);
