@@ -27,5 +27,10 @@ http.createServer(function(req, res) {
   var filePath = path.join(__dirname, 'public', req.url);
   console.log('%s %s', req.connection.remoteAddress, req.url);
   var fileStream = fs.createReadStream(filePath);
+  fileStream.on('error', function(e) {
+  	console.log('problem with file: ' + e.message);
+  });
+
   fileStream.pipe(res);
+
 }).listen(3030);
